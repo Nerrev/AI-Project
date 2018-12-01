@@ -8,27 +8,38 @@ public class Generator {
     }
 
 
-    public Table generateTable(ArrayList<Lecturer> lecturers,ArrayList<Course> courses,ArrayList<Room> rooms,ArrayList<TimeSlot> timeTable){
-        Table table=null;
-        int min= lecturers.size()*2*3;// lectureses*min courses*labs to 12 hours
-        int max= lecturers.size()*4*3;// meh
+
+    public ArrayList<Table> generatePopulation(int populationSize,ArrayList<Lecturer> lecturers,ArrayList<Course> courses,ArrayList<Room> rooms,ArrayList<TimeSlot> timeTable){
+        ArrayList<Table> population=new ArrayList<>();
+
+        for(int i=0;i<populationSize;i++)
+                population.add(generateTable(i,lecturers,courses,rooms,timeTable));
 
 
+        //do evaluations maybe
 
-
-
-        return table;
+        return population;
     }
 
 
 
+    public Table generateTable(int id,ArrayList<Lecturer> lecturers,ArrayList<Course> courses,ArrayList<Room> rooms,ArrayList<TimeSlot> timeTable){
+        Table table=null;
+        ArrayList<Entry> entries= new ArrayList<>();
+
+        int min= lecturers.size()*2*3;// lectureses*min courses*labs to 12 hours
+        int max= lecturers.size()*4*3;// meh
+
+        int numOfEntries=generateRandom(min,max);
+
+        for(int i=min;i<max;i++)
+            entries.add(generateEntry(lecturers,courses,rooms,timeTable));
 
 
+        table= new Table(id,entries);
 
-
-
-
-
+        return table;
+    }
 
 
 

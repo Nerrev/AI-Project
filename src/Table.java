@@ -1,12 +1,15 @@
+import java.util.ArrayList;
+
 public class Table {
     private int id;
-    private Entry[] entries;
+    private ArrayList<Entry> entries;
     private int fitness;
 
-    public Table(int id, Entry[] entries) {
+    public Table(int id, ArrayList<Entry> entries) {
         this.id = id;
         this.entries = entries;
     }
+
 
     public int getId() {
         return id;
@@ -16,11 +19,11 @@ public class Table {
         this.id = id;
     }
 
-    public Entry[] getEnteries() {
+    public ArrayList<Entry> getEnteries() {
         return entries;
     }
 
-    public void setEnteries(Entry[] entries) {
+    public void setEnteries(ArrayList<Entry> entries) {
         this.entries = entries;
     }
 
