@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 public class GeneticsOperations {
@@ -55,13 +56,14 @@ public class GeneticsOperations {
 
 
 public ArrayList<Table> getRandomGroup(ArrayList<Table> population){ //selects a random number of tables from population for parent selection
+        Collections.shuffle(population);
         Random rand = new Random();
         int min=2,max=population.size()-1,range=max-min+1;
         int groupSize=rand.nextInt((max/2)-min+1) + min;
         ArrayList<Table> randomGroup= new ArrayList<>(groupSize);
 
         for(int i=0;i<groupSize;i++)
-            randomGroup.add(population.get(rand.nextInt(max+1)));
+            randomGroup.add(population.get(rand.nextInt(max)));
 
 
         return randomGroup;
