@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Main {
 
@@ -9,11 +10,10 @@ public class Main {
         ArrayList<Room> rooms= gen.generateRooms(10);
         ArrayList<Course> courses= gen.generateCourses(10,5);
         ArrayList<Lecturer> lecturers= gen.generateLecturers(7,courses);
-        Entry e= gen.generateEntry(lecturers,courses,rooms,timeTable);
 
+        Table x =gen.generateTable(0,lecturers,courses,rooms,timeTable);
 
-
-
+        System.out.println(x.calcFitness());
 
 
     }

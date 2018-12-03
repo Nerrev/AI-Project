@@ -32,12 +32,11 @@ public class Generator {
 
         int numOfEntries=generateRandom(min,max);
 
-        for(int i=min;i<max;i++)
-            entries.add(generateEntry(lecturers,courses,rooms,timeTable));
+        for(int i=0;i<numOfEntries;i++) {
+            entries.add(generateEntry(lecturers, courses, rooms, timeTable));
 
-
+        }
         table= new Table(id,entries);
-
         return table;
     }
 

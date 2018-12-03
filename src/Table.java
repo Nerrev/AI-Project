@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Table {
     private int id;
@@ -33,5 +34,20 @@ public class Table {
 
     public void setFitness(int fitness) {
         this.fitness = fitness;
+
+    }
+    public int calcFitness(){
+        int count=0;
+        HashMap<Integer,Entry> ht =new HashMap<>();
+        ArrayList<Entry> e = getEnteries();
+        for(int i=0;i<e.size();i++){
+            if(ht.get(e.get(i).hashCode()) == null)
+                ht.put(e.get(i).hashCode(),e.get(i));
+            else
+                count++;
+        }
+
+       setFitness(count);
+        return count;
     }
 }

@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Entry {
     private int time;
     private int room;
@@ -41,6 +43,21 @@ public class Entry {
 
     public void setCourse(int course) {
         this.course = course;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Entry)) return false;
+        Entry entry = (Entry) o;
+        return getTime() == entry.getTime() &&
+                getRoom() == entry.getRoom();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getTime(), getRoom());
     }
 
     @Override
