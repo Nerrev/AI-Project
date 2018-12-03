@@ -63,9 +63,8 @@ public List<Table> getRandomGroup(ArrayList<Table> population){ //selects a rand
         Random rand = new Random();
         int min=2,max=population.size()-1;
 
-        int start=rand.nextInt(max+1); //choose a random index to cut the population
         int groupSize=rand.nextInt((max/2)-min+1) + min; // get a random size for the group // smaller than half the size of the population
-
+        int start=rand.nextInt((max+1)/2); //choose a random index to cut the population
 
         List<Table> randomGroup=population.subList(start,start+groupSize);
 
