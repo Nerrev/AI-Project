@@ -10,7 +10,7 @@ public class Generator {
 
 
     public ArrayList<Table> generatePopulation(int populationSize,ArrayList<Lecturer> lecturers,ArrayList<Course> courses,ArrayList<Room> rooms,ArrayList<TimeSlot> timeTable){
-        ArrayList<Table> population=new ArrayList<>();
+        ArrayList<Table> population=new ArrayList<>(populationSize);
 
         for(int i=0;i<populationSize;i++)
                 population.add(generateTable(i,lecturers,courses,rooms,timeTable));
@@ -124,7 +124,7 @@ public class Generator {
 
 
 
-    public int generateRandom(int min , int max){
+   static public int generateRandom(int min , int max){
         int n=0;
         Random rand = new Random();
         n=rand.nextInt((max - min) + 1) + min;
