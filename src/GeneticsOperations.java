@@ -1,13 +1,11 @@
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Random;
 
 public class GeneticsOperations {
 
 
     public Table selectParent(ArrayList<Table> population){ //selects the best table from a random group of population
-        List<Table> randomGroup=getRandomGroup(population);
+        ArrayList<Table> randomGroup=getRandomGroup(population);
         randomGroup.sort(Table::compareTo);
         return randomGroup.get(0);
     }
@@ -56,17 +54,14 @@ public class GeneticsOperations {
 
 
 
-public List<Table> getRandomGroup(ArrayList<Table> population){ //selects a random number of tables from population for parent selection
-
-        Collections.shuffle(population); //shuffle population // can be done without
-
+public ArrayList<Table> getRandomGroup(ArrayList<Table> population){ //selects a random number of tables from population for parent selection
         Random rand = new Random();
-        int min=2,max=population.size()-1;
+        int min=2,max=population.size()-1,range=max-min+1;
+        int groupSize=rand.nextInt((max/2)-min+1) + min;
+        ArrayList<Table> randomGroup= new ArrayList<>(groupSize);
 
-        int groupSize=rand.nextInt((max/2)-min+1) + min; // get a random size for the group // smaller than half the size of the population
-        int start=rand.nextInt((max+1)/2); //choose a random index to cut the population
-
-        List<Table> randomGroup=population.subList(start,start+groupSize);
+        for(int i=0;i<groupSize;i++)
+            randomGroup.add(population.get(rand.nextInt(max+1)));
 
 
         return randomGroup;
