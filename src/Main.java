@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 public class Main {
 
-    static public int populationSize=100;
+    static public int populationSize=1000;
     static public double mutationChance=0.3;
     public static void main(String[] args) {
         Generator gen= new Generator();
@@ -53,11 +53,10 @@ public class Main {
 
             generation++;
 
-            System.out.println(generation);
-
         }
         for(int i=0;i< population.size();i++)
         System.out.println(population.get(i).getFitness());
+        System.out.println(generation);
     }
 
 

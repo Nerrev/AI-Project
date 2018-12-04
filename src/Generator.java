@@ -14,10 +14,6 @@ public class Generator {
 
         for(int i=0;i<populationSize;i++)
                 population.add(generateTable(i));
-
-
-        //do evaluations maybe
-
         return population;
     }
 
@@ -27,13 +23,14 @@ public class Generator {
         Table table=null;
         ArrayList<Entry> entries= new ArrayList<>();
 
-        int min= Lecturer.lecturers.size()*2*3;// lectureses*min courses*labs to 12 hours
+        int min= Lecturer.lecturers.size()*2*3;// lecturers*min courses*labs to 12 hours
         int max= Lecturer.lecturers.size()*4*3;// meh
 
         int numOfEntries=generateRandom(min,max);
 
         for(int i=0;i<numOfEntries;i++) {
-            entries.add(generateEntry());
+            Entry entry = generateEntry();
+            entries.add(entry);
 
         }
         table= new Table(id,entries);
@@ -151,8 +148,11 @@ public class Generator {
     }
 
     public Entry generateEntry(){
-
-        return new Entry(TimeSlot.TimeTable.get(generateRandom(0,TimeSlot.TimeTable.size()-1)).getId(),Room.rooms.get(generateRandom(0,Room.rooms.size()-1)).getId(),Lecturer.lecturers.get(generateRandom(0,Lecturer.lecturers.size()-1)).getId(),Course.courses.get(generateRandom(0,Course.courses.size()-1)).getId());
+            int timeSlot=TimeSlot.TimeTable.get(generateRandom(0,TimeSlot.TimeTable.size()-1)).getId();
+            int room=Room.rooms.get(generateRandom(0,Room.rooms.size()-1)).getId();
+            int lecturer=Lecturer.lecturers.get(generateRandom(0,Lecturer.lecturers.size()-1)).getId();
+            int courses=Lecturer.lecturers.get(lecturer).getFavorites().get(generateRandom(0,Lecturer.lecturers.get(lecturer).getFavorites().size()-1)).getId();
+        return new Entry(timeSlot,room,lecturer,courses);
     }
 
 

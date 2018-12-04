@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Random;
 
 public class GeneticsOperations {
@@ -60,7 +59,6 @@ public class GeneticsOperations {
         for(int i=0;i<E1.size();i++)
             if(Math.random()<mutationRate)
                 E1.set(i,gen.generateEntry());
-
         chromosome.calculateFitness();
 
     }

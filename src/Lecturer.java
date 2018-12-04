@@ -4,8 +4,11 @@ public class Lecturer {
     private int id;
     private String name;
     private ArrayList<Course> favorites;
+    private ArrayList<Entry> schedule;
 
+    public void addToSchedule(){
 
+    }
 
     public static ArrayList<Lecturer> lecturers;
 
@@ -38,6 +41,14 @@ public class Lecturer {
 
     public void setFavorites(ArrayList<Course> favorites) {
         this.favorites = favorites;
+    }
+
+    public ArrayList<Entry> getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(ArrayList<Entry> schedule) {
+        this.schedule = schedule;
     }
 
     @Override
