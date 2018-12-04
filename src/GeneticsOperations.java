@@ -58,7 +58,7 @@ public class GeneticsOperations {
         Generator gen=new Generator();
 
         for(int i=0;i<E1.size();i++)
-            if(Math.random()>mutationRate)
+            if(Math.random()<mutationRate)
                 E1.set(i,gen.generateEntry());
 
         chromosome.calculateFitness();

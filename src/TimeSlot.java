@@ -1,17 +1,19 @@
-import java.sql.Time;
 import java.util.ArrayList;
 
 public class TimeSlot {
     private int id;
-    private boolean SMW;
-    private String time;
+    private int slot;
+    private Days day;
 
 
     public static ArrayList<TimeSlot>TimeTable;
 
-    public TimeSlot(int id, boolean SMW) {
+    public enum Days{Saturday,Monday,Tuesday,Wednesday,Thursday};
+
+    public TimeSlot(int id, int slot, Days day) {
         this.id = id;
-        this.SMW = SMW;
+        this.slot = slot;
+        this.day = day;
     }
 
     public int getId() {
@@ -22,29 +24,19 @@ public class TimeSlot {
         this.id = id;
     }
 
-    public boolean isSMW() {
-        return SMW;
+    public int getSlot() {
+        return slot;
     }
 
-    public void setSMW(boolean SMW) {
-        this.SMW = SMW;
+    public void setSlot(int slot) {
+        this.slot = slot;
     }
 
-    public String getTime() {
-        return time;
+    public Days getDay() {
+        return day;
     }
 
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-
-    @Override
-    public String toString() {
-        return "TimeSlot{" +
-                "id=" + id +
-                ", SMW=" + SMW +
-                ", time='" + time + '\'' +
-                '}';
+    public void setDay(Days day) {
+        this.day = day;
     }
 }

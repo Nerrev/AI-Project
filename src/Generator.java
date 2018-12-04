@@ -99,14 +99,47 @@ public class Generator {
     public ArrayList<TimeSlot> generateTimeTable(){
         ArrayList<TimeSlot> TimeTable=new ArrayList<>();
 
-        for(int i=0;i<9;i++)
-            TimeTable.add(new TimeSlot(i,true));
-        for(int i=9;i<15;i++)
-            TimeTable.add(new TimeSlot(i,false));
-
+        for(int i=0;i<39;i++)
+            TimeTable.add(new TimeSlot(i,getSlot(i),getDay(i)));
 
         return TimeTable;
     }
+
+    public TimeSlot.Days getDay(int id){
+        TimeSlot.Days day;
+
+        if(id <9)
+            day= TimeSlot.Days.Saturday;
+        else if(id>8 && id <18)
+            day= TimeSlot.Days.Monday;
+        else if (id >17 && id <24)
+            day= TimeSlot.Days.Tuesday;
+        else if (id>23 && id<33)
+            day= TimeSlot.Days.Wednesday;
+        else
+            day= TimeSlot.Days.Thursday;
+
+        return day;
+    }
+
+    public int getSlot(int id){
+        int slot=0;
+
+
+        if(id <9)
+            slot=id;
+        else if(id>8 && id <18)
+            slot=id-9;
+        else if (id >17 && id <24)
+            slot=id-15;
+        else if (id>23 && id<33)
+            slot=id-24;
+        else
+            slot=id-30;
+
+        return slot;
+    }
+
 
     public ArrayList<Lecturer> generateLecturers(int numOfLecturers){
         ArrayList<Lecturer> Lecturers= new ArrayList<>();

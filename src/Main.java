@@ -38,9 +38,9 @@ public class Main {
 
             //System.out.println(family[2].getEnteries().size() + " " + family[2].getFitness() + " - " + family[3].getEnteries().size() + " " + family[3].getFitness());
 
-            if (Math.random() > mutationChance)
+            if (Math.random() < mutationChance)
                 go.mutate(0.5, family[2]);
-            if (Math.random() > mutationChance)
+            if (Math.random() < mutationChance)
                 go.mutate(0.5, family[3]);
 
           //  System.out.println(family[2].getEnteries().size() + " " + family[2].getFitness() + " - " + family[3].getEnteries().size() + " " + family[3].getFitness());
