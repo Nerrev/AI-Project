@@ -12,32 +12,68 @@ public class Main {
         Lecturer.lecturers= gen.generateLecturers(7);
 
         ArrayList<Table>population=gen.generatePopulation(populationSize);
-
-        for(int i =0;i<population.size();i++)
+        for (int i = 0; i < population.size(); i++)
             population.get(i).calculateFitness();
 
+        int solution=-1;
+        int generation=0;
+        while(generation < 2000000) {
 
-        GeneticsOperations go= new GeneticsOperations();
-
-        Table parent1=go.selectParent(population);
-        System.out.println("P1("+parent1.getId()+"):"+" Size:"+parent1.getEnteries().size() + " fitness:"+parent1.getFitness());
-
-        Table parent2=go.selectParent(population);
-        System.out.println("P2("+parent2.getId()+"):"+" Size:"+parent2.getEnteries().size() + " fitness:"+parent2.getFitness());
-
-
-        Table[] family=go.crossOver(parent1,parent2);
+            int k= done(population);
+            if(k>=0)
+                break;
 
 
-        System.out.println(family[2].getEnteries().size()+" "+family[2].getFitness()+" - "+family[3].getEnteries().size()+" "+family[3].getFitness());
+            GeneticsOperations go = new GeneticsOperations();
 
-        if(Math.random()>mutationChance)
-            go.mutate(0.5,family[2]);
-        if(Math.random()>mutationChance)
-            go.mutate(0.5,family[3]);
+            Table parent1 = go.selectParent(population);
+            //System.out.println("P1(" + parent1.getId() + "):" + " Size:" + parent1.getEnteries().size() + " fitness:" + parent1.getFitness());
 
-        System.out.println(family[2].getEnteries().size()+" "+family[2].getFitness()+" - "+family[3].getEnteries().size()+" "+family[3].getFitness());
+            Table parent2 = go.selectParent(population);
+            //System.out.println("P2(" + parent2.getId() + "):" + " Size:" + parent2.getEnteries().size() + " fitness:" + parent2.getFitness());
 
 
+            Table[] family = go.crossOver(parent1, parent2);
+
+
+            //System.out.println(family[2].getEnteries().size() + " " + family[2].getFitness() + " - " + family[3].getEnteries().size() + " " + family[3].getFitness());
+
+            if (Math.random() > mutationChance)
+                go.mutate(0.5, family[2]);
+            if (Math.random() > mutationChance)
+                go.mutate(0.5, family[3]);
+
+          //  System.out.println(family[2].getEnteries().size() + " " + family[2].getFitness() + " - " + family[3].getEnteries().size() + " " + family[3].getFitness());
+
+
+            Table[] selected = go.selection(family);
+
+            for (int i = 0; i < selected.length; i++)
+                population.set(selected[i].getId(), selected[i]);
+
+            generation++;
+
+            System.out.println(generation);
+
+        }
+        for(int i=0;i< population.size();i++)
+        System.out.println(population.get(i).getFitness());
+    }
+
+
+
+
+
+
+
+    public static int done(ArrayList<Table>population){
+        int f=-1;
+        for(int i=0;i<population.size();i++)
+            if(population.get(i).getFitness() == 0) {
+                f = i;
+                return f;
+            }
+
+            return f;
     }
 }

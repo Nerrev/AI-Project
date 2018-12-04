@@ -65,9 +65,26 @@ public class GeneticsOperations {
 
     }
 
+    public Table[] selection(Table []family){
+        Table[] selected = new Table[2];
+        int best=0;
+        int secondBest=0;
+        for(int i=0;i<family.length;i++) //select the one with best fitness
+            if(family[i].getFitness() > family[best].getFitness()) {
+                secondBest=best;
+                best = i;
+            }
+
+        selected[0]=family[best];
+        selected[1]=family[secondBest];
+        selected[0].setId(family[0].getId());
+        selected[1].setId(family[1].getId());
+        return  selected;
+    }
+
 
 public ArrayList<Table> getRandomGroup(ArrayList<Table> population){ //selects a random number of tables from population for parent selection
-        Collections.shuffle(population);
+        //Collections.shuffle(population);
         Random rand = new Random();
         int min=2,max=population.size()-1,range=max-min+1;
         int groupSize=rand.nextInt((max/2)-min+1) + min;
