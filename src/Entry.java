@@ -60,6 +60,10 @@ public class Entry {
         return Objects.hash(getTime(), getRoom());
     }
 
+    public int timeLecturerHash(){
+        return Objects.hash(getTime(), getLecturer());
+    }
+
     @Override
     public String toString() {
         return "Entry{" +

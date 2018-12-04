@@ -1,3 +1,4 @@
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -67,5 +68,24 @@ public class Course {
                 ", lab=" + lab +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    public static void printCourses(){
+        try {
+
+            PrintWriter writer = new PrintWriter("courses.txt", "UTF-8");
+            for(int i=0;i<courses.size();i++)
+                writer.println(courses.get(i).name+","+(courses.get(i).isLab()?"L":"C"));
+
+
+
+            writer.close();
+
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 }

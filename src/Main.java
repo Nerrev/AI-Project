@@ -1,15 +1,15 @@
 import java.util.ArrayList;
 public class Main {
 
-    static public int populationSize=1000;
-    static public double mutationChance=0.3;
+    static public int populationSize=100;
+    static public double mutationChance=0.4;
     public static void main(String[] args) {
         Generator gen= new Generator();
 
         TimeSlot.TimeTable= gen.generateTimeTable();
-        Room.rooms= gen.generateRooms(10);
-        Course.courses= gen.generateCourses(10,5);
-        Lecturer.lecturers= gen.generateLecturers(7);
+        Room.rooms= gen.generateRooms(20);
+        Course.courses= gen.generateCourses(15,5);
+        Lecturer.lecturers= gen.generateLecturers(8);
 
         ArrayList<Table>population=gen.generatePopulation(populationSize);
         for (int i = 0; i < population.size(); i++)
@@ -17,11 +17,15 @@ public class Main {
 
         int solution=-1;
         int generation=0;
-        while(generation < 2000000) {
+        while(generation < 10000) {
 
             int k= done(population);
-            if(k>=0)
+            if(k>=0) {
+                Lecturer.printLecturers();
+                Course.printCourses();
+                Room.printRooms();
                 break;
+            }
 
 
             GeneticsOperations go = new GeneticsOperations();
@@ -57,6 +61,8 @@ public class Main {
         for(int i=0;i< population.size();i++)
         System.out.println(population.get(i).getFitness());
         System.out.println(generation);
+
+
     }
 
 

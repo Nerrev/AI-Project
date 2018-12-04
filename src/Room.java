@@ -1,3 +1,4 @@
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public class Room {
@@ -47,5 +48,25 @@ public class Room {
                 ", inMainBulding=" + inMainBulding +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+
+    public static void printRooms(){
+        try {
+
+            PrintWriter writer = new PrintWriter("Rooms.txt", "UTF-8");
+            for(int i=0;i<rooms.size();i++)
+                writer.println(rooms.get(i).name+","+(rooms.get(i).isInMainBulding()?"M":"O"));
+
+
+
+            writer.close();
+
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 }

@@ -1,14 +1,11 @@
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public class Lecturer {
     private int id;
     private String name;
     private ArrayList<Course> favorites;
-    private ArrayList<Entry> schedule;
 
-    public void addToSchedule(){
-
-    }
 
     public static ArrayList<Lecturer> lecturers;
 
@@ -43,13 +40,6 @@ public class Lecturer {
         this.favorites = favorites;
     }
 
-    public ArrayList<Entry> getSchedule() {
-        return schedule;
-    }
-
-    public void setSchedule(ArrayList<Entry> schedule) {
-        this.schedule = schedule;
-    }
 
     @Override
     public String toString() {
@@ -58,5 +48,27 @@ public class Lecturer {
                 ", name='" + name + '\'' +
                 ", favorites=" + favorites +
                 '}';
+    }
+
+    public static void printLecturers(){
+        try {
+
+            PrintWriter writer = new PrintWriter("Lecturers.txt", "UTF-8");
+            for(int i=0;i<lecturers.size();i++){
+                writer.print(lecturers.get(i).name);
+                for(int j=0;j<lecturers.get(i).getFavorites().size()-1;j++)
+                    writer.print(","+lecturers.get(i).getFavorites().get(j).getId());
+                writer.println();
+            }
+
+
+            writer.close();
+
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 }

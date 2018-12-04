@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 
 public class Table implements Comparable<Table> {
@@ -53,17 +54,62 @@ public class Table implements Comparable<Table> {
 
     }
 
-    public int calculateFitness(){
+    public void calculateFitness(){
+        setFitness(timeRoomConflicts()+lecturerTimeConflict()+hoursViolations());
+    }
+
+    public int timeRoomConflicts(){ //calculate how many entries have the same (room and time)
         int count=0;
         HashMap<Integer,Entry> ht =new HashMap<>();
         ArrayList<Entry> e = getEnteries();
-        for(int i=0;i<e.size();i++)
-            if(ht.get(e.get(i).hashCode()) == null)
-                ht.put(e.get(i).hashCode(),e.get(i));
+        for(int i=0;i<e.size();i++) {
+            int hash=e.get(i).hashCode();
+            if (ht.get(hash) == null)
+                ht.put(hash, e.get(i));
             else
                 count++;
-
-       setFitness(count);
+        }
         return count;
     }
+    public int lecturerTimeConflict(){//calculate how many classes a teacher has in the same time slot
+        int count=0;
+        HashMap<Integer,Entry> ht =new HashMap<>();
+        ArrayList<Entry> e = getEnteries();
+        for(int i=0;i<e.size();i++) {
+            int hash=e.get(i).timeLecturerHash();
+            if (ht.get(hash) == null)
+                ht.put(hash, e.get(i));
+            else
+                count++;
+        }
+        return count;
+    }
+     public int hoursViolations(){ //add hours for each teacher in a hash table and then check the violations
+        int violations=0;
+
+         HashMap<Integer,Integer> ht =new HashMap<>();
+         ArrayList<Entry> e = getEnteries();
+         for(int i=0;i<e.size();i++) {
+             Entry en=e.get(i);
+             int hours=0;
+             if(Course.getCourses().get(en.getCourse()).isLab())
+                 hours=2;
+             else
+                 hours=3;
+             int hash=en.getLecturer();
+             if (ht.get(hash) == null)
+                 ht.put(hash,hours);
+             else
+                 ht.put(hash,ht.get(hash)+hours);
+         }
+
+         for(int i=0;i<ht.size();i++) {
+             int hours=ht.getOrDefault(i, 0);
+             if (hours > 18 || hours <12)
+                 violations++;
+         }
+
+        return violations;
+
+     }
 }
