@@ -122,7 +122,6 @@ public class Generator {
     public int getSlot(int id){
         int slot=0;
 
-
         if(id <9)
             slot=id;
         else if(id>8 && id <18)
@@ -148,10 +147,10 @@ public class Generator {
     }
 
     public Entry generateEntry(){
-            int timeSlot=TimeSlot.TimeTable.get(generateRandom(0,TimeSlot.TimeTable.size()-1)).getId();
             int room=Room.rooms.get(generateRandom(0,Room.rooms.size()-1)).getId();
             int lecturer=Lecturer.lecturers.get(generateRandom(0,Lecturer.lecturers.size()-1)).getId();
             int courses=Lecturer.lecturers.get(lecturer).getFavorites().get(generateRandom(0,Lecturer.lecturers.get(lecturer).getFavorites().size()-1)).getId();
+            int timeSlot=TimeSlot.TimeTable.get(generateRandom(0,TimeSlot.TimeTable.size()-1)).getId();
         return new Entry(timeSlot,room,lecturer,courses);
     }
 
