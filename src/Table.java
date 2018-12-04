@@ -6,6 +6,8 @@ public class Table implements Comparable<Table> {
     private ArrayList<Entry> entries;
     private int fitness;
 
+
+
     public Table(int id, ArrayList<Entry> entries) {
         this.id = id;
         this.entries = entries;

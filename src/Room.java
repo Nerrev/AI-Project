@@ -1,7 +1,13 @@
+import java.util.ArrayList;
+
 public class Room {
     private int id;
     private boolean inMainBulding;
     private String name;
+
+
+
+    public static ArrayList<Room>rooms;
 
     public Room(int id, boolean inMainBulding, String name) {
         this.id = id;

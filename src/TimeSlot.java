@@ -1,7 +1,13 @@
+import java.sql.Time;
+import java.util.ArrayList;
+
 public class TimeSlot {
     private int id;
     private boolean SMW;
     private String time;
+
+
+    public static ArrayList<TimeSlot>TimeTable;
 
     public TimeSlot(int id, boolean SMW) {
         this.id = id;

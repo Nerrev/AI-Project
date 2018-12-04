@@ -9,11 +9,11 @@ public class Generator {
 
 
 
-    public ArrayList<Table> generatePopulation(int populationSize,ArrayList<Lecturer> lecturers,ArrayList<Course> courses,ArrayList<Room> rooms,ArrayList<TimeSlot> timeTable){
+    public ArrayList<Table> generatePopulation(int populationSize){
         ArrayList<Table> population=new ArrayList<>(populationSize);
 
         for(int i=0;i<populationSize;i++)
-                population.add(generateTable(i,lecturers,courses,rooms,timeTable));
+                population.add(generateTable(i));
 
 
         //do evaluations maybe
@@ -23,17 +23,17 @@ public class Generator {
 
 
 
-    public Table generateTable(int id,ArrayList<Lecturer> lecturers,ArrayList<Course> courses,ArrayList<Room> rooms,ArrayList<TimeSlot> timeTable){
+    public Table generateTable(int id){
         Table table=null;
         ArrayList<Entry> entries= new ArrayList<>();
 
-        int min= lecturers.size()*2*3;// lectureses*min courses*labs to 12 hours
-        int max= lecturers.size()*4*3;// meh
+        int min= Lecturer.lecturers.size()*2*3;// lectureses*min courses*labs to 12 hours
+        int max= Lecturer.lecturers.size()*4*3;// meh
 
         int numOfEntries=generateRandom(min,max);
 
         for(int i=0;i<numOfEntries;i++) {
-            entries.add(generateEntry(lecturers, courses, rooms, timeTable));
+            entries.add(generateEntry());
 
         }
         table= new Table(id,entries);
@@ -108,18 +108,18 @@ public class Generator {
         return TimeTable;
     }
 
-    public ArrayList<Lecturer> generateLecturers(int numOfLecturers,ArrayList<Course> courses){
+    public ArrayList<Lecturer> generateLecturers(int numOfLecturers){
         ArrayList<Lecturer> Lecturers= new ArrayList<>();
 
         for(int i=0;i<numOfLecturers;i++)
-            Lecturers.add(new Lecturer(i,"L"+i,generateFavs(courses)));
+            Lecturers.add(new Lecturer(i,"L"+i,generateFavs(Course.courses)));
 
         return Lecturers;
     }
 
-    public Entry generateEntry(ArrayList<Lecturer> lecturers,ArrayList<Course> courses,ArrayList<Room> rooms,ArrayList<TimeSlot> timeTable){
+    public Entry generateEntry(){
 
-        return new Entry(timeTable.get(generateRandom(0,timeTable.size()-1)).getId(),rooms.get(generateRandom(0,rooms.size()-1)).getId(),lecturers.get(generateRandom(0,lecturers.size()-1)).getId(),courses.get(generateRandom(0,courses.size()-1)).getId());
+        return new Entry(TimeSlot.TimeTable.get(generateRandom(0,TimeSlot.TimeTable.size()-1)).getId(),Room.rooms.get(generateRandom(0,Room.rooms.size()-1)).getId(),Lecturer.lecturers.get(generateRandom(0,Lecturer.lecturers.size()-1)).getId(),Course.courses.get(generateRandom(0,Course.courses.size()-1)).getId());
     }
 
 

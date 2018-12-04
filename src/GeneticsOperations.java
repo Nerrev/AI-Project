@@ -53,6 +53,17 @@ public class GeneticsOperations {
         return family;
     }
 
+    public void mutate(double mutationRate,Table chromosome){
+        ArrayList<Entry> E1=chromosome.getEnteries();
+        Generator gen=new Generator();
+
+        for(int i=0;i<E1.size();i++)
+            if(Math.random()>mutationRate)
+                E1.set(i,gen.generateEntry());
+
+        chromosome.calculateFitness();
+
+    }
 
 
 public ArrayList<Table> getRandomGroup(ArrayList<Table> population){ //selects a random number of tables from population for parent selection

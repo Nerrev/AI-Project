@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Course {
@@ -5,6 +6,8 @@ public class Course {
     private boolean lab;
     private String name;
 
+
+    static public ArrayList<Course> courses;
 
     public Course(int id, boolean lab, String name) {
         this.id = id;
@@ -34,6 +37,14 @@ public class Course {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public static ArrayList<Course> getCourses() {
+        return courses;
+    }
+
+    public static void setCourses(ArrayList<Course> courses) {
+        Course.courses = courses;
     }
 
     @Override

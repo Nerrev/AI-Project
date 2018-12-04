@@ -1,18 +1,17 @@
 import java.util.ArrayList;
-import java.util.HashMap;
-
 public class Main {
 
     static public int populationSize=100;
+    static public double mutationChance=0.3;
     public static void main(String[] args) {
         Generator gen= new Generator();
 
-        ArrayList<TimeSlot> timeTable= gen.generateTimeTable();
-        ArrayList<Room> rooms= gen.generateRooms(10);
-        ArrayList<Course> courses= gen.generateCourses(10,5);
-        ArrayList<Lecturer> lecturers= gen.generateLecturers(7,courses);
+        TimeSlot.TimeTable= gen.generateTimeTable();
+        Room.rooms= gen.generateRooms(10);
+        Course.courses= gen.generateCourses(10,5);
+        Lecturer.lecturers= gen.generateLecturers(7);
 
-        ArrayList<Table>population=gen.generatePopulation(populationSize,lecturers,courses,rooms,timeTable);
+        ArrayList<Table>population=gen.generatePopulation(populationSize);
 
         for(int i =0;i<population.size();i++)
             population.get(i).calculateFitness();
@@ -32,6 +31,12 @@ public class Main {
 
         System.out.println(family[2].getEnteries().size()+" "+family[2].getFitness()+" - "+family[3].getEnteries().size()+" "+family[3].getFitness());
 
+        if(Math.random()>mutationChance)
+            go.mutate(0.5,family[2]);
+        if(Math.random()>mutationChance)
+            go.mutate(0.5,family[3]);
+
+        System.out.println(family[2].getEnteries().size()+" "+family[2].getFitness()+" - "+family[3].getEnteries().size()+" "+family[3].getFitness());
 
 
     }

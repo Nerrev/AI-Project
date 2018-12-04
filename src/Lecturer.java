@@ -5,6 +5,10 @@ public class Lecturer {
     private String name;
     private ArrayList<Course> favorites;
 
+
+
+    public static ArrayList<Lecturer> lecturers;
+
     public Lecturer(int id, String name, ArrayList<Course> favorites) {
         this.id = id;
         this.name = name;
