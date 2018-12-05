@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 public class Main {
 
-    static public int populationSize=100;
+    static public int populationSize=250;
     static public double mutationChance=0.4;
     public static void main(String[] args) {
         Generator gen= new Generator();

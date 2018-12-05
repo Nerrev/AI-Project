@@ -1,23 +1,24 @@
+import java.util.List;
 import java.util.Objects;
 
 public class Entry {
-    private int time;
+    private List<Integer> time;
     private int room;
     private int lecturer;
     private int course;
 
-    public Entry(int time, int room, int lecturer, int course) {
+    public Entry(List<Integer> time, int room, int lecturer, int course) {
         this.time = time;
         this.room = room;
         this.lecturer = lecturer;
         this.course = course;
     }
 
-    public int getTime() {
+    public List<Integer> getTime() {
         return time;
     }
 
-    public void setTime(int time) {
+    public void setTime(List<Integer> time) {
         this.time = time;
     }
 
@@ -55,13 +56,13 @@ public class Entry {
                 getRoom() == entry.getRoom();
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(getTime(), getRoom());
+
+    public int timeRoomHash(int time) {
+        return Objects.hash(time, getRoom());
     }
 
-    public int timeLecturerHash(){
-        return Objects.hash(getTime(), getLecturer());
+    public int timeLecturerHash(int time){
+        return Objects.hash(time, getLecturer());
     }
 
     @Override

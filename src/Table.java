@@ -59,30 +59,36 @@ public class Table implements Comparable<Table> {
     }
 
     public int timeRoomConflicts(){ //calculate how many entries have the same (room and time)
-        int count=0;
+        int conflicts=0;
         HashMap<Integer,Entry> ht =new HashMap<>();
         ArrayList<Entry> e = getEnteries();
         for(int i=0;i<e.size();i++) {
-            int hash=e.get(i).hashCode();
-            if (ht.get(hash) == null)
-                ht.put(hash, e.get(i));
-            else
-                count++;
+            Entry en=e.get(i);
+            for(int j=0;j<en.getTime().size();j++) {
+                int hash = en.timeRoomHash(en.getTime().get(j));
+                if (ht.get(hash) == null)
+                    ht.put(hash, en);
+                else
+                    conflicts++;
+            }
         }
-        return count;
+        return conflicts/2;
     }
     public int lecturerTimeConflict(){//calculate how many classes a teacher has in the same time slot
-        int count=0;
+        int conflicts=0;
         HashMap<Integer,Entry> ht =new HashMap<>();
         ArrayList<Entry> e = getEnteries();
         for(int i=0;i<e.size();i++) {
-            int hash=e.get(i).timeLecturerHash();
-            if (ht.get(hash) == null)
-                ht.put(hash, e.get(i));
-            else
-                count++;
+            Entry en=e.get(i);
+            for(int j=0;j<en.getTime().size();j++) {
+                int hash = en.timeLecturerHash(en.getTime().get(j));
+                if (ht.get(hash) == null)
+                    ht.put(hash, en);
+                else
+                    conflicts++;
+            }
         }
-        return count;
+        return conflicts/2;
     }
      public int hoursViolations(){ //add hours for each teacher in a hash table and then check the violations
         int violations=0;
