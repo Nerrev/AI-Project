@@ -67,12 +67,15 @@ public class GeneticsOperations {
         Table[] selected = new Table[2];
         int best=0;
         int secondBest=0;
-        for(int i=0;i<family.length;i++) //select the one with best fitness
-            if(family[i].getFitness() < family[best].getFitness()) {
-                secondBest=best;
-                best = i;
-            }
+        for (int i = 0; i < family.length; i++) {
 
+            if (family[i].getFitness() < family[best].getFitness()) {
+                secondBest= best;
+                best= i;
+
+            } else if (family[i].getFitness() < family[secondBest].getFitness())
+                secondBest =i;
+        }
         selected[0]=family[best];
         selected[1]=family[secondBest];
         selected[0].setId(family[0].getId()); //children don't have ID,set the selected to parent ids. always
@@ -87,10 +90,10 @@ public ArrayList<Table> getRandomGroup(ArrayList<Table> population){ //selects a
         int groupSize=rand.nextInt((max/2)-min+1) + min;
         ArrayList<Table> randomGroup= new ArrayList<>(groupSize);
 
-        for(int i=0;i<groupSize;i++)
-            randomGroup.add(population.get(rand.nextInt(max)));
-
-
+        for(int i=0;i<groupSize;i++) {
+            int in=rand.nextInt(max);
+            randomGroup.add(population.get(in));
+        }
         return randomGroup;
     }
 

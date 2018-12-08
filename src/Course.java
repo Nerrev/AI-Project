@@ -57,11 +57,6 @@ public class Course {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(getId());
-    }
-
-    @Override
     public String toString() {
         return "Course{" +
                 "id=" + id +
@@ -80,8 +75,6 @@ public class Course {
 
 
             writer.close();
-
-
 
         }catch (Exception e){
             e.printStackTrace();

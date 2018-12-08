@@ -47,16 +47,6 @@ public class Entry {
     }
 
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Entry)) return false;
-        Entry entry = (Entry) o;
-        return getTime() == entry.getTime() &&
-                getRoom() == entry.getRoom();
-    }
-
-
     public int timeRoomHash(int time) {
         return Objects.hash(time, getRoom());
     }
