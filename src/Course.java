@@ -1,3 +1,5 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -65,12 +67,35 @@ public class Course {
                 '}';
     }
 
+
+    public static void readCourses(){
+        Course.courses = new ArrayList<>();
+        try(BufferedReader br = new BufferedReader(new FileReader("Courses.txt"))) {
+            String line = br.readLine();
+
+            while (line != null) {
+                String[] info= line.split(",");
+                int id= Integer.parseInt(info[0]);
+                String name=info[1];
+                boolean islab=false;
+                if(info[2].equals("L"))
+                    islab=true;
+
+                courses.add(new Course(id,islab,name));
+
+                line = br.readLine();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     public static void printCourses(){
         try {
 
             PrintWriter writer = new PrintWriter("courses.txt", "UTF-8");
             for(int i=0;i<courses.size();i++)
-                writer.println(courses.get(i).name+","+(courses.get(i).isLab()?"L":"C"));
+                writer.println(courses.get(i).getId()+","+courses.get(i).name+","+(courses.get(i).isLab()?"L":"C"));
 
 
 

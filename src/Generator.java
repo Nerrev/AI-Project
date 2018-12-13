@@ -21,6 +21,10 @@ public class Generator {
 
         int min= Lecturer.lecturers.size()*(2+3);// max for minimum Entries = 2 courses (6 hours) + 3 labs(6 hours) = 12 hours  for each instructor
         int max= Lecturer.lecturers.size()*7;// Max entries(18 hours *  number of instructors) -> 7 is the max combination that won't cross 18 hours (2 courses + 5 labs // 4 courses + 3 labs)
+        int Umax=15*Room.rooms.size();
+
+        if(max > Umax)
+            max=Umax;
 
         int numOfEntries=generateRandom(min,max);
 
@@ -36,8 +40,8 @@ public class Generator {
     public Entry generateEntry(){
         int room=generateRandom(0,Room.rooms.size()-1);
         int lecturer=generateRandom(0,Lecturer.lecturers.size()-1);
-        ArrayList<Course> lFavorites=Lecturer.lecturers.get(lecturer).getFavorites();
-        int courses=lFavorites.get(generateRandom(0,lFavorites.size()-1)).getId();
+        ArrayList<Integer> lFavorites=Lecturer.lecturers.get(lecturer).getFavorites();
+        int courses=lFavorites.get(generateRandom(0,lFavorites.size()-1));
         List<Integer> timeSlots;
         if(Course.getCourses().get(courses).isLab())
             timeSlots=getLabSlots();
@@ -96,22 +100,22 @@ public class Generator {
 
 
 
-    public ArrayList<Course> generateFavs(ArrayList<Course> courses){
-        ArrayList<Course> favs= new ArrayList<>();
+    public ArrayList<Integer> generateFavs(ArrayList<Course> courses){
+        ArrayList<Integer> favs= new ArrayList<>();
 
 
         while(favs.size()<5){
             int index=generateRandom(0,courses.size()-1);
             Course course=courses.get(index);
             if(!course.isLab() && !favs.contains(course) )
-                favs.add (course);
+                favs.add (index);
 
         }
 
         while(favs.size()<10){
             int index=generateRandom(0,courses.size()-1);
             if(courses.get(index).isLab() && !favs.contains(courses.get(index)))
-                favs.add(courses.get(index));
+                favs.add(index);
         }
 
         return favs;
@@ -148,15 +152,23 @@ public class Generator {
 public List<Integer>getLabSlots(){
     List<Integer> timeSlots=new ArrayList<>();
 
-    int n= generateRandom(1,9);
+    int n= generateRandom(1,12);
     switch (n) {
         case 1: timeSlots.add(6);
                 timeSlots.add(7);
                 timeSlots.add(8);
             break;
+        case 11: timeSlots.add(6);
+            timeSlots.add(7);
+            timeSlots.add(8);
+            break;
         case 2:  timeSlots.add(15);
                 timeSlots.add(16);
                 timeSlots.add(17);
+            break;
+        case 10:  timeSlots.add(15);
+            timeSlots.add(16);
+            timeSlots.add(17);
             break;
         case 3:  timeSlots.add(18);
                 timeSlots.add(19);
@@ -170,6 +182,10 @@ public List<Integer>getLabSlots(){
         case 6:  timeSlots.add(30);
                  timeSlots.add(31);
                  timeSlots.add(32);
+            break;
+        case 12:  timeSlots.add(30);
+            timeSlots.add(31);
+            timeSlots.add(32);
             break;
         case 7:  timeSlots.add(33);
                 timeSlots.add(34);
@@ -187,19 +203,19 @@ public List<Integer>getLabSlots(){
 }
 
 
-    public TimeSlot.Days getDay(int id){
-        TimeSlot.Days day;
+    public int getDay(int id){
+        int day;
 
         if(id <9)
-            day= TimeSlot.Days.Saturday;
+            day= 0;
         else if(id>8 && id <18)
-            day= TimeSlot.Days.Monday;
+            day= 1;
         else if (id >17 && id <24)
-            day= TimeSlot.Days.Tuesday;
+            day= 2;
         else if (id>23 && id<33)
-            day= TimeSlot.Days.Wednesday;
+            day= 3;
         else
-            day= TimeSlot.Days.Thursday;
+            day= 4;
 
         return day;
     }

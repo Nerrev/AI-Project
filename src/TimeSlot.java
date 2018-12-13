@@ -3,14 +3,14 @@ import java.util.ArrayList;
 public class TimeSlot {
     private int id;
     private int slot;
-    private Days day;
+    private int day;
 
 
     public static ArrayList<TimeSlot>TimeTable;
 
     public enum Days{Saturday,Monday,Tuesday,Wednesday,Thursday};
 
-    public TimeSlot(int id, int slot, Days day) {
+    public TimeSlot(int id, int slot, int day) {
         this.id = id;
         this.slot = slot;
         this.day = day;
@@ -32,11 +32,11 @@ public class TimeSlot {
         this.slot = slot;
     }
 
-    public Days getDay() {
+    public int getDay() {
         return day;
     }
 
-    public void setDay(Days day) {
+    public void setDay(int day) {
         this.day = day;
     }
 }

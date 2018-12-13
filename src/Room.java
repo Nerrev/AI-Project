@@ -1,3 +1,5 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
@@ -51,12 +53,36 @@ public class Room {
     }
 
 
+    public static void readRooms(){
+        Room.rooms =new ArrayList<>();
+        try(BufferedReader br = new BufferedReader(new FileReader("Rooms.txt"))) {
+            String line = br.readLine();
+
+            while (line != null) {
+                String[] info= line.split(",");
+                int id= Integer.parseInt(info[0]);
+                String name=info[1];
+                boolean isInMain=false;
+                if(info[2].equals("O"))
+                    isInMain=true;
+
+                rooms.add(new Room(id,isInMain,name));
+
+                line = br.readLine();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
+
     public static void printRooms(){
         try {
 
             PrintWriter writer = new PrintWriter("Rooms.txt", "UTF-8");
             for(int i=0;i<rooms.size();i++)
-                writer.println(rooms.get(i).name+","+(rooms.get(i).isInMainBulding()?"M":"O"));
+                writer.println(rooms.get(i).getId()+","+rooms.get(i).name+","+(rooms.get(i).isInMainBulding()?"M":"O"));
 
 
 
