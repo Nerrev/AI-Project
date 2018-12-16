@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Main {
 
@@ -8,18 +7,19 @@ public class Main {
     static public double mutationRate=0.3;
     static public int maxGenerations=10000;
     static public int maxTries=50;
-    static public double softConstraintsGoal=0.6;
+    static public double softConstraintsGoal=0.7;
+    static public boolean firstSolution=true;
 
     public static ArrayList<Table> Solutions=new ArrayList<>();
 
     public static void main(String[] args) {
-        Scanner in= new Scanner(System.in);
         Generator gen = new Generator();
         TimeSlot.TimeTable=gen.generateTimeTable();
         Room.readRooms();
         Course.readCourses();
         Lecturer.readLectures();
         for (int l = 0; l < maxTries; l++) {
+            boolean flag=false;
             ArrayList<Table> population = gen.generatePopulation(populationSize);
             for (int i = 0; i < population.size(); i++)
                 population.get(i).calculateFitness();
@@ -27,8 +27,10 @@ public class Main {
             int generation = 0;
             while (generation < maxGenerations) {
 
-                if(findSolutions(population))
+                if(findSolutions(population) && firstSolution) {
+                    flag=true;
                     break;
+                }
 
 
                 GeneticsOperations go = new GeneticsOperations();
@@ -60,7 +62,12 @@ public class Main {
                 generation++;
                 //System.out.println(generation);
             }
-            System.out.println("Computing...");
+            if(flag){
+                System.out.println("Solution Found.");
+                break;
+            }
+            else
+                System.out.println("Computing...");
         }
         if(Solutions.isEmpty())
             System.out.println("Failed ! No Solution was Found.");
@@ -75,8 +82,10 @@ public class Main {
         for(int i=0;i<population.size();i++){
             int hardFitness=population.get(i).getHardFitness();
             double softFitness=population.get(i).getSoftFitness();
-            if(hardFitness == 0 && softFitness>softConstraintsGoal){
+            if(hardFitness == 0 && softFitness<=softConstraintsGoal){
+                Table t=population.get(i);
                 Solutions.add(population.get(i));
+                population.remove(t.getId());
                 return true;
             }
         }

@@ -76,6 +76,9 @@ public class GeneticsOperations {
             } else if (family[i].getFitness() < family[secondBest].getFitness())
                 secondBest =i;
         }
+
+
+
         selected[0]=family[best];
         selected[1]=family[secondBest];
         selected[0].setId(family[0].getId()); //children don't have ID,set the selected to parent ids. always
@@ -86,13 +89,15 @@ public class GeneticsOperations {
 
 public ArrayList<Table> getRandomGroup(ArrayList<Table> population){ //selects a random number of tables from population for parent selection
         Random rand = new Random();
-        int min=2,max=population.size()-1,range=max-min+1;
+        int min=2,max=population.size()-1;
         int groupSize=rand.nextInt((max/2)-min+1) + min;
         ArrayList<Table> randomGroup= new ArrayList<>(groupSize);
 
         for(int i=0;i<groupSize;i++) {
             int in=rand.nextInt(max);
-            randomGroup.add(population.get(in));
+            Table t=population.get(in);
+            if(t.getHardFitness() != 0)
+                randomGroup.add(t);
         }
         return randomGroup;
     }

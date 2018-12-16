@@ -1,6 +1,5 @@
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class Table implements Comparable<Table> {
@@ -72,22 +71,22 @@ public class Table implements Comparable<Table> {
         setHardFitness(timeRoomConflicts()+lecturerTimeConflict()+hoursViolations());
         int softConflicts=at8COurses();
         setFitness(getHardFitness()+softConflicts);
-        setSoftFitness(1-((double)softConflicts/entries.size()));
+        setSoftFitness(((double)softConflicts/Lecturer.lecturers.size()));
     }
 
     public int timeRoomConflicts(){ //calculate how many entries have the same (room and time)
         int conflicts=0;
-        HashMap<Integer,Boolean> ht =new HashMap<>();
+        boolean[][] ht =new boolean[Room.rooms.size()][39];
         ArrayList<Entry> e = getEnteries();
         for(int i=0;i<e.size();i++){
             Entry en=e.get(i);
             int currentConflicts=0;
             for(int j=0;j<en.getTime().size();j++) {
-                int hash = en.timeRoomHash(en.getTime().get(j));
-                if (ht.get(hash) == null)
-                    ht.put(hash, true);
-                else
+                int index = en.getRoom();
+                if (ht[index][en.getTime().get(j)])
                     currentConflicts++;
+                else
+                    ht[index][en.getTime().get(j)]=true;
             }
             if(currentConflicts>0)
                 conflicts++;
@@ -103,7 +102,7 @@ public class Table implements Comparable<Table> {
          ArrayList<Entry> e = getEnteries();
          for(int i=0;i<e.size();i++) {
              Entry en=e.get(i);
-             int hours=0;
+             int hours;
              int index=en.getLecturer();
              if(Course.getCourses().get(en.getCourse()).isLab())
                  hours=2;
@@ -127,6 +126,39 @@ public class Table implements Comparable<Table> {
         return violations;
      }
 
+
+    public int lecturerTimeConflict(){//calculate how many classes a teacher has in the same time slot
+        int conflicts=0;
+        boolean[][] ht =new boolean[Lecturer.lecturers.size()][39];
+        int[] consecutiveCourses=new int[Lecturer.lecturers.size()];
+        ArrayList<Entry> e = getEnteries();
+        for(int i=0;i<e.size();i++) {
+            Entry en=e.get(i);
+            int currentConflicts=0, currentCC=0;
+            List<Integer> times=en.getTime();
+            for(int j=0;j<times.size();j++) {
+                int index=en.getLecturer();
+                if (ht[index][times.get(j)])
+                    currentConflicts++;
+                else {
+                    ht[index][times.get(j)] = true;
+                    if ((times.get(j) != 38 && ht[index][times.get(j) + 1]) || (times.get(j) != 0 && ht[index][times.get(j) - 1]))
+                        currentCC++;
+                }
+            }
+            if(currentConflicts>0)
+                conflicts++;
+            else if(currentCC>0)
+                consecutiveCourses[en.getLecturer()]+=1;
+
+        }
+        for(int k=0;k<consecutiveCourses.length;k++)
+            if(consecutiveCourses[k] > 3)
+                conflicts++;
+        return conflicts;
+    }
+
+
      public int at8COurses(){
         int coursesAt8=0;
         boolean[] slotsAt8=new boolean [39];//{0,9,18,24,33};
@@ -142,50 +174,6 @@ public class Table implements Comparable<Table> {
         }
 
         return coursesAt8;
-     }
-     public int  lecturerViolations(){
-         int violations=0;
-         HashMap<Integer, List<Integer>> ht =new HashMap<>();
-         HashMap<Integer,Integer> ht2 =new HashMap<>();
-         ArrayList<Entry> e = getEnteries();
-         for(int i=0;i<e.size();i++) {
-             boolean flag=false;
-             Entry en=e.get(i);
-             int hash=en.getLecturer();
-             List<Integer>v=ht.get(hash);
-             if (v == null)
-                 ht.put(hash,en.getTime());
-             else {
-                 for(int k=0;k<en.getTime().size();k++) {
-                     if (v.contains(en.getTime().get(k))) {
-                         violations++;
-                         flag=true;
-                         break;
-                     }
-                 }
-                 if(!flag){
-                 for(int k=0;k<en.getTime().size();k++) {
-                     if (v.contains(en.getTime().get(k) + 1) || v.contains(en.getTime().get(k) - 1)) {
-                         if(ht2.get(en.getLecturer()) == null) {
-                             ht2.put(en.getLecturer(), 1);
-                         }
-                         else {
-                             ht2.put(en.getLecturer(), ht2.get(en.getLecturer())+1);
-                         }
-                         break;
-                     }
-                 }
-                 }
-                 v.addAll(en.getTime());
-             }
-         }
-         for(int i=0;i<Lecturer.lecturers.size();i++) {
-             int hours=ht2.getOrDefault(i,0);
-             if (hours > 3)
-                 violations++;
-         }
-
-         return violations;
      }
 
      public void printTable(){
@@ -271,23 +259,4 @@ public class Table implements Comparable<Table> {
      }
 
 
-    public int lecturerTimeConflict(){//calculate how many classes a teacher has in the same time slot
-        int conflicts=0;
-        HashMap<Integer,Boolean> ht =new HashMap<>();
-        ArrayList<Entry> e = getEnteries();
-        for(int i=0;i<e.size();i++) {
-            Entry en=e.get(i);
-            int currentConflicts=0;
-            for(int j=0;j<en.getTime().size();j++) {
-                int hash = en.timeLecturerHash(en.getTime().get(j));
-                if (ht.get(hash) == null)
-                    ht.put(hash, true);
-                else
-                    currentConflicts++;
-            }
-            if(currentConflicts>0)
-                conflicts++;
-        }
-        return conflicts;
-    }
 }
