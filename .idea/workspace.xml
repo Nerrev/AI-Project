@@ -2,15 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="614e74c0-adfd-463e-8069-6a698b34c3e6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/s1.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AI-Project/Course.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AI-Project/Course.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AI-Project/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AI-Project/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AI-Project/Room.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AI-Project/Room.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AI-Project/Table.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AI-Project/Table.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GeneticsOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GeneticsOperations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Table.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -276,7 +268,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544986217730" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544986511342" />
     <property name="last_opened_file_path" value="$USER_HOME$/Desktop/Genetics8Queens" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
@@ -390,7 +382,14 @@
       <option name="project" value="LOCAL" />
       <updated>1544730616093</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="-">
+      <created>1544986235863</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1544986235863</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="ToolWindowManager">
