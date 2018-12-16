@@ -68,7 +68,7 @@ public class Table implements Comparable<Table> {
     }
 
     public void calculateFitness(){
-        setHardFitness(timeRoomConflicts()+lecturerTimeConflict()+hoursViolations());
+        setHardFitness(timeRoomConflicts()+lecturerConflicts()+hoursViolations());
         int softConflicts=at8COurses();
         setFitness(getHardFitness()+softConflicts);
         setSoftFitness(((double)softConflicts/Lecturer.lecturers.size()));
@@ -127,7 +127,7 @@ public class Table implements Comparable<Table> {
      }
 
 
-    public int lecturerTimeConflict(){//calculate how many classes a teacher has in the same time slot
+    public int lecturerConflicts(){//calculate how many classes a teacher has in the same time slot
         int conflicts=0;
         boolean[][] ht =new boolean[Lecturer.lecturers.size()][39];
         int[] consecutiveCourses=new int[Lecturer.lecturers.size()];

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Main {
 
@@ -71,10 +72,10 @@ public class Main {
         }
         if(Solutions.isEmpty())
             System.out.println("Failed ! No Solution was Found.");
-
-        for(int i=0;i<Solutions.size();i++)
-            Solutions.get(i).printTable();
-
+        else {
+            Collections.sort(Solutions);
+            Solutions.get(0).printTable();
+        }
     }
 
 
