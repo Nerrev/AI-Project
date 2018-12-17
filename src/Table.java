@@ -212,14 +212,14 @@ public class Table implements Comparable<Table> {
                     int daySlot=slot.getSlot();
                     String room=Room.rooms.get(ent.getRoom()).getName();
                     String course= Course.courses.get(ent.getCourse()).getName();
-                    day[daySlot]="|  *"+course+" - "+room+"*  |";
+                    day[daySlot]="*"+course+" - "+room+"* ";
                 }
 
 
             }
 
             String[] week={"Saturday","Monday","Tuesday","Wednesday","Thursday"};
-            String[] SMW={"8:00","9:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00"};
+            String[] SMW={"8:00","9:00","10:00","11:00","12:00","1:00","2:00","3:00","4:00","5:00"};
             String[] TR={"8:00","9:30","11:00","12:30","2:00","3:30","5:00"};
             /*String[] SMW={"8:00-9:00","9:00-10:00","10:00-11:00","11:00-12:00","12:00-13:00","13:00-14:00","14:00-15:00","15:00-16:00","16:00-17:00"};
             String[] TR={"8:00-9:30","9:30-11:00","11:00-12:30","12:30-2:00","2:00-3:30","3:30-5:00"};
@@ -235,17 +235,17 @@ public class Table implements Comparable<Table> {
                         t=SMW[m];
                     else
                         t=TR[m];
-                    System.out.print(t);
+                    System.out.print("|"+t+"| ");
                     String x=printable.get(p)[m];
                     if(x == null)
-                        System.out.print("|  ------  |");
+                        System.out.print("N/A ");
                     else
                         System.out.print(x);
                 }
                 if(p == 0 || p==1 || p==3)
-                    System.out.print(SMW[9]);
+                    System.out.print("|"+SMW[9]);
                 else
-                    System.out.print(TR[6]);
+                    System.out.print("|"+TR[6]);
                 System.out.println("#");
             }
 
