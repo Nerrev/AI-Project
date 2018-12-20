@@ -3,8 +3,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 
 public class ContParameters {
+    @FXML
+    AnchorPane ParametersPane1;
+    @FXML
+    AnchorPane waitPane;
     @FXML
     TextField PopulationSize;
 
@@ -30,7 +35,7 @@ public class ContParameters {
 
     @FXML
     public void initialize() {
-
+        ParametersPane1.setVisible(true);
         PopulationSize.setText("300");
         MutationChance.setText("0.5");
         MutationRate.setText("0.3");
@@ -51,9 +56,12 @@ public class ContParameters {
             Main.firstSolution=true;
         else
             Main.firstSolution=false;
-        w();
+        ParametersPane1.setVisible(false);
+        waitPane.setVisible(true);
         Main.Work();
         pr();
+        ParametersPane1.setVisible(true);
+        waitPane.setVisible(false);
     }
     public void pr(){
         try {
