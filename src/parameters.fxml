@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="ParametersPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ContParameters">
+   <children>
+      <ImageView fitHeight="400.0" fitWidth="600.0">
+         <image>
+            <Image url="@Untitled-1.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="PopulationSize" layoutX="270.0" layoutY="104.0" prefHeight="26.0" prefWidth="65.0" />
+      <TextField fx:id="MutationRate" layoutX="271.0" layoutY="154.0" prefHeight="11.0" prefWidth="53.0" />
+      <TextField fx:id="NumberOfTries" layoutX="272.0" layoutY="204.0" prefHeight="11.0" prefWidth="53.0" />
+      <TextField fx:id="MaxGenerations" layoutX="451.0" layoutY="154.0" prefHeight="26.0" prefWidth="90.0" />
+      <TextField fx:id="MutationChance" layoutX="451.0" layoutY="104.0" prefHeight="11.0" prefWidth="53.0" />
+      <TextField fx:id="AmLectures" layoutX="451.0" layoutY="204.0" prefHeight="11.0" prefWidth="53.0" />
+      <RadioButton fx:id="FirstSolution" layoutX="249.0" layoutY="263.0" mnemonicParsing="false" text="Stop when the first solution is found" textFill="#266aa1">
+         <font>
+            <Font name="Changa-ExtraBold" size="12.0" />
+         </font>
+         <toggleGroup>
+            <ToggleGroup fx:id="g1" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="OptimalSolution" layoutX="249.0" layoutY="288.0" mnemonicParsing="false" text="Search For A Better Solution" textFill="#266aa1" toggleGroup="$g1">
+         <font>
+            <Font name="Changa-ExtraBold" size="12.0" />
+         </font>
+      </RadioButton>
+      <Button layoutX="397.0" layoutY="317.0" mnemonicParsing="false" onAction="#go" opacity="0.0" prefHeight="55.0" prefWidth="152.0" text="Button" />
+   </children>
+</AnchorPane>

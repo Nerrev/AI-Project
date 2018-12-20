@@ -176,6 +176,7 @@ public class Table implements Comparable<Table> {
         return coursesAt8;
      }
 
+
      public void printTable(){
         ArrayList<Entry> [] tables= new ArrayList[Lecturer.lecturers.size()];
         for(int i=0;i<tables.length;i++)
@@ -187,7 +188,6 @@ public class Table implements Comparable<Table> {
             int  lecturer=en.getLecturer();
             tables[lecturer].add(en);
         }
-
 
         for(int i=0;i<tables.length;i++){
             String[] saturday= new String[9];

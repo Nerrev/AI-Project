@@ -1,19 +1,44 @@
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Main {
+
+
+public class Main extends Application {
+
+
+    public static Stage primaryStage;
+    @Override
+    public void start(Stage primaryStage) throws Exception{
+        Parent root = FXMLLoader.load(getClass().getResource("home.fxml"));
+        this.primaryStage=primaryStage;
+        primaryStage.setTitle("Welcome");
+        primaryStage.setScene(new Scene(root));
+        primaryStage.show();
+    }
+
 
     static public int populationSize=300;
     static public double mutationChance=0.5;
     static public double mutationRate=0.3;
     static public int maxGenerations=10000;
-    static public int maxTries=50;
+    static public int maxTries=150;
     static public double softConstraintsGoal=0.7;
     static public boolean firstSolution=true;
 
     public static ArrayList<Table> Solutions=new ArrayList<>();
 
     public static void main(String[] args) {
+        launch(args);
+    }
+
+
+    public static void Work(){
         Generator gen = new Generator();
         TimeSlot.TimeTable=gen.generateTimeTable();
         Room.readRooms();
@@ -63,21 +88,19 @@ public class Main {
                 generation++;
                 //System.out.println(generation);
             }
-            if(flag){
-                System.out.println("Solution Found.");
+            if(flag)
                 break;
-            }
-            else
-                System.out.println("Computing...");
+
         }
-        if(Solutions.isEmpty())
+  /*      if(Solutions.isEmpty()){
             System.out.println("Failed ! No Solution was Found.");
+        }
         else {
             Collections.sort(Solutions);
-            Solutions.get(0).printTable();
-        }
-    }
+            Solutions.get(0);
+        }*/
 
+    }
 
     public static boolean findSolutions(ArrayList<Table>population){
         for(int i=0;i<population.size();i++){
@@ -92,4 +115,5 @@ public class Main {
         }
         return false;
     }
+
 }
